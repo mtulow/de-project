@@ -10,6 +10,7 @@ def on_open():
     print()
 
 def on_message(message):
+    
     print()
     pprint(message, indent=4)
 
