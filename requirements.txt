@@ -1,0 +1,12 @@
+requests
+python-dotenv
+numpy
+pandas
+geopandas
+pyarrow
+shapely
+xarray[all]
+rasterio
+fiona
+leafmap
+coinbase-advanced-py
