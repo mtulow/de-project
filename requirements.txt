@@ -10,3 +10,5 @@ rasterio
 fiona
 leafmap
 coinbase-advanced-py
+boto3
+datetime
