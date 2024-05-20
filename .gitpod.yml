@@ -6,7 +6,13 @@
 
 tasks:
   - name: Setup, Install dependencies
+    init: python3 -m venv .venv
     command: |
-      python3 -m venv .venv
       source .venv/bin/activate
       pip3 install -r requirements.txt
+
+
+vscode:
+    extensions:
+        - almenon.arepl
+        - littlefoxteam.vscode-python-test-adapter@0.3.16:tZ/6xOSSdKUaq6JCUVkD+A==
