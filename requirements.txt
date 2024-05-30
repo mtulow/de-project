@@ -12,3 +12,13 @@ leafmap
 coinbase-advanced-py
 boto3
 datetime
+confluent-kafka
+dlt[duckdb]
+dlt[sqlite]
+dlt[snowflake]
+dbt-core
+dbt-snowflake
+fastapi
+redis
+types-redis
+uvicorn

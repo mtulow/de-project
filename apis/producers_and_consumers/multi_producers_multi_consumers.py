@@ -7,7 +7,7 @@ from threading import Barrier
 from queue import Queue
  
 # producer task
-def producer(barrier, queue, identifier):
+def producer_task(barrier, queue, identifier):
     print(f'Producer {identifier}: Running')
     # generate items
     for i in range(10):
@@ -27,7 +27,7 @@ def producer(barrier, queue, identifier):
     print(f'Producer {identifier}: Done')
  
 # consumer task
-def consumer(queue, identifier):
+def consumer_task(queue, identifier):
     print(f'Consumer {identifier}: Running')
     # consume items
     while True:
@@ -50,14 +50,15 @@ def main():
     # create the shared queue
     queue = Queue()
     # create the shared barrier
-    n_producers = 3
+    n_producers = 4
+    n_consumers = 4
     barrier = Barrier(n_producers)
     # start the consumers
-    consumers = [Thread(target=consumer, args=(queue,i)) for i in range(5)]
+    consumers = [Thread(target=consumer_task, args=(queue,i)) for i in range(n_consumers)]
     for consumer in consumers:
         consumer.start()
     # start the producers
-    producers = [Thread(target=producer, args=(barrier,queue,i)) for i in range(n_producers)]
+    producers = [Thread(target=producer_task, args=(barrier,queue,i)) for i in range(n_producers)]
     # start the producers
     for producer in producers:
         producer.start()
