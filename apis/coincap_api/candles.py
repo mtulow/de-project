@@ -12,8 +12,8 @@ def get_candles(quote_id: str,
                 exchange: str = 'poloniex',
                 start: str | dt.datetime | None = None,
                 end: str | dt.datetime | None = None,
-                payload: dict = {},
-                headers: dict = {},
+                data: dict = None,
+                headers: dict = None,
     ):
     """Get candles for a specific asset on a specific exchange.
 
@@ -25,29 +25,38 @@ def get_candles(quote_id: str,
         start (str | dt.datetime | None): The start time for the candles.
         end (str | dt.datetime | None): The end time for the candles.
     """
-    url = "https://api.coincap.io/v2/candles?exchange=poloniex&interval=h8&baseId=ethereum&quoteId=bitcoin"
+    url = 'https://api.coincap.io/v2/candles'
 
-    payload = {}
     headers = {}
+    data = data or dict(quoteId=quote_id,
+                        interval=interval,
+                        baseId=base_id,
+                        exchange=exchange,)
+    if start:
+        data['start'] = start
+    if end:
+        data['end'] = end
 
-    response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.request("GET", url, headers=headers, data=data)
     response.raise_for_status()
     return response.json()
 
 
 def main():
-    token = 'ethereum'
-    base_asset = 'bitcoin'
+    token = 'bitcoin'
+    base_asset = 'ethereum'
     interval = 'h12'
     exchange = 'poloniex'
 
-
-    candles = get_candles(token,
-                          interval=interval,
-                          base_id=base_asset,
-                          exchange=exchange)
-    for candle in candles:
-        print(candle)
+    response_data = get_candles(token,
+                                interval=interval,
+                                base_id=base_asset,
+                                exchange=exchange)
+    
+    candles = response_data['data']
+    timestamp = response_data['timestamp']
+    
+    print(f'{timestamp = }\n{candles = }')
 
 if __name__ == '__main__':
     print()

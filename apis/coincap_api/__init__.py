@@ -40,9 +40,7 @@ def demo_candles_endpoint(token: str = 'ethereum'):
     pipeline.run(candles_data,
                  table_name=table_name,
                  write_disposition='overwrite')
-    for candle in candle_data:
-        print(candle)
-        print()
+    
 
 
 
