@@ -11,6 +11,12 @@ tasks:
       source .venv/bin/activate
       pip3 install -r requirements.txt
 
+  - name: Run tests
+    command: |
+      source .venv/bin/activate
+      python -m pytest apis/tests
+
+
 vscode:
     extensions:
         - almenon.arepl
